@@ -1,0 +1,75 @@
+/* stylesheet.css - Quick Note styling */
+
+.quick-note-container {
+    padding: 16px;
+    background-color: rgba(30, 30, 30, 0.95);
+    border-radius: 8px;
+    min-width: 480px;
+    min-height: 320px;
+    spacing: 10px;
+}
+
+.quick-note-textarea {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+    padding: 10px 12px;
+    color: #ffffff;
+    font-size: 14px;
+    font-family: monospace;
+    line-height: 1.6;
+    min-height: 200px;
+    caret-color: #3584e4;
+}
+
+.quick-note-textarea:focus {
+    border-color: rgba(53, 132, 228, 0.6);
+    box-shadow: 0 0 0 2px rgba(53, 132, 228, 0.2);
+}
+
+.quick-note-button-row {
+    spacing: 8px;
+    margin-top: 8px;
+}
+
+.quick-note-button {
+    padding: 6px 18px;
+    border-radius: 4px;
+    border: none;
+    font-weight: 500;
+    font-size: 13px;
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: background-color 0.15s;
+}
+
+.quick-note-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.quick-note-button:active {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.save-button {
+    background-color: #3584e4;
+}
+
+.save-button:hover {
+    background-color: #4a91e7;
+}
+
+.close-button {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.close-button:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.quick-note-status {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 4px;
+    padding: 0 4px;
+}
