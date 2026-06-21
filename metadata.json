@@ -1,7 +1,7 @@
 {
   "uuid": "quickmd@ydrea.github.io",
   "name": "Quick MD Notes",
-  "description": "A drop-down note editor that auto-saves",
+  "description": "A drop-down note editor that auto-saves .md files.",
   "shell-version": [ "45","46" ],
   "url": "https://github.com/ydrea/quickMD",
   "author": "ydrea",
