@@ -19,7 +19,7 @@ class QuickNoteEditor extends PanelMenu.Button {
 
         // Add icon
         let icon = new St.Icon({
-            icon_name: 'text-editor-symbolic',
+            icon_name: 'face-smile-symbolic',
             style_class: 'system-status-icon'
         });
         this.add_child(icon);
@@ -40,73 +40,87 @@ class QuickNoteEditor extends PanelMenu.Button {
         this._loadNote();
     }
 
-    _buildMenuItems() {
-        // Clear the menu
-        this.menu.removeAll();
+_buildMenuItems() {
+    this.menu.removeAll();
 
-        // Create a custom menu item for our content
-        let menuItem = new PopupMenu.PopupBaseMenuItem({
-            reactive: false,
-            can_focus: false
-        });
+    let menuItem = new PopupMenu.PopupBaseMenuItem({
+        reactive: false,
+        can_focus: false
+    });
 
-        // Main container
-        let box = new St.BoxLayout({
-            vertical: true,
-            width: 400,
-            height: 300,
-            style: 'padding: 12px; background-color: rgba(30,30,30,0.95); border-radius: 8px;'
-        });
+    let box = new St.BoxLayout({
+        vertical: true,
+        width: 400,
+        height: 320,
+        style: 'padding: 12px; background-color: rgba(30,30,30,0.95); border-radius: 8px; spacing: 8px;'
+    });
 
-        // Text area
-        this._textArea = new St.Entry({
-            can_focus: true,
-            width: 370,
-            height: 210,
-            style: 'background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 8px; color: white; font-family: monospace;'
-        });
-        this._textArea.clutter_text.set_line_wrap(true);
-        this._textArea.clutter_text.set_single_line_mode(false);
-        this._textArea.clutter_text.connect('text-changed', () => {
-            this._autoSave();
-        });
-        box.add_child(this._textArea);
+    // Label
+    let label = new St.Label({
+        text: 'Quick Note',
+        style: 'font-size: 14px; font-weight: bold; color: white;'
+    });
+    box.add_child(label);
 
-        // Status
-        this._statusLabel = new St.Label({
-            text: 'Ready',
-            style: 'font-size: 11px; color: rgba(255,255,255,0.8); margin-top: 4px;'
-        });
-        box.add_child(this._statusLabel);
+    // Scrollable text area
+    let scrollView = new St.ScrollView({
+        width: 370,
+        height: 210,
+        style: 'background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px;',
+        overlay_scrollbars: true,
+    });
 
-        // Buttons
-        let btnRow = new St.BoxLayout({
-            style: 'margin-top: 8px; spacing: 8px;'
-        });
+    this._textArea = new St.Entry({
+        can_focus: true,
+        style: 'padding: 8px; color: white; font-family: monospace; background: transparent; border: none;'
+    });
 
-        let saveBtn = new St.Button({
-            label: 'Save & Close',
-            style: 'padding: 6px 16px; background: #3584e4; color: white; border-radius: 4px;'
-        });
-        saveBtn.connect('clicked', () => {
-            this._saveNote();
-            this.menu.close();
-        });
-        btnRow.add_child(saveBtn);
+    this._textArea.clutter_text.set_line_wrap(true);
+    this._textArea.clutter_text.set_single_line_mode(false);
+    this._textArea.clutter_text.set_activatable(false);
 
-        let closeBtn = new St.Button({
-            label: 'Close',
-            style: 'padding: 6px 16px; background: rgba(255,255,255,0.1); color: white; border-radius: 4px;'
-        });
-        closeBtn.connect('clicked', () => {
-            this.menu.close();
-        });
-        btnRow.add_child(closeBtn);
+    this._textArea.clutter_text.connect('text-changed', () => {
+        this._autoSave();
+    });
 
-        box.add_child(btnRow);
-        menuItem.add_child(box);
-        this.menu.addMenuItem(menuItem);
-    }
+    scrollView.add_child(this._textArea);
+    box.add_child(scrollView);
+
+    // Status
+    this._statusLabel = new St.Label({
+        text: 'Ready',
+        style: 'font-size: 11px; color: rgba(255,255,255,0.4);'
+    });
+    box.add_child(this._statusLabel);
+
+    // Buttons
+    let btnRow = new St.BoxLayout({
+        style: 'margin-top: 4px; spacing: 8px;'
+    });
+
+    let saveBtn = new St.Button({
+        label: 'Save & Close',
+        style: 'padding: 6px 16px; background: #3584e4; color: white; border-radius: 4px;'
+    });
+    saveBtn.connect('clicked', () => {
+        this._saveNote();
+        this.menu.close();
+    });
+    btnRow.add_child(saveBtn);
+
+    let closeBtn = new St.Button({
+        label: 'Close',
+        style: 'padding: 6px 16px; background: rgba(255,255,255,0.1); color: white; border-radius: 4px;'
+    });
+    closeBtn.connect('clicked', () => {
+        this.menu.close();
+    });
+    btnRow.add_child(closeBtn);
+
+    box.add_child(btnRow);
+    menuItem.add_child(box);
+    this.menu.addMenuItem(menuItem);
+}
 
     _loadNote() {
         try {
