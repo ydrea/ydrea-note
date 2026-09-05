@@ -8,11 +8,13 @@ A minimal, drop-down markdown note editor for GNOME Shell. Click the panel icon 
 ## Features
 
 - **Drop-down editor** – Opens from the top panel with a single click
+- **Scrolling and highlighting** – Supports basic editor functionality
+- **Copy and paste** – Uses clipboard for cut, copy, paste & select all
 - **Auto-save** – Notes are automatically saved as you type (with debounce)
 - **Markdown support** – Edit `.md` files with proper formatting
 - **Dark theme** – Clean, dark styling that matches GNOME's aesthetic
 - **Persistent storage** – Notes are saved to `~/.quicknotes/quick-note.md`
-- **Manual save** – Option to save and close with the save button
+- **Manual save** – Option to save and close with the save&close button
 
 ## Installation
 
@@ -25,6 +27,7 @@ A minimal, drop-down markdown note editor for GNOME Shell. Click the panel icon 
 ### Manual Installation
 
 1. Clone this repository:
+
    ```bash
    git clone https://github.com/ydrea/quickMD.git ~/.local/share/gnome-shell/extensions/quickmd@ydrea.github.io
    ```
@@ -51,18 +54,19 @@ A minimal, drop-down markdown note editor for GNOME Shell. Click the panel icon 
 
 ## Configuration
 
-| Setting | Default | Description |
-|---------|---------|-------------|
-| Note file | `~/.quicknotes/quick-note.md` | Where notes are stored |
-| Auto-save delay | 1000ms | Time before auto-save triggers |
-| Editor width | 400px | Width of the drop-down editor |
-| Editor height | 300px | Height of the drop-down editor |
+| Setting         | Default                       | Description                    |
+| --------------- | ----------------------------- | ------------------------------ |
+| Note file       | `~/.quicknotes/quick-note.md` | Where notes are stored         |
+| Auto-save delay | 1000ms                        | Time before auto-save triggers |
+| Editor width    | 400px                         | Width of the drop-down editor  |
+| Editor height   | 300px                         | Height of the drop-down editor |
 
 ### Custom Note Location
 
 To change where notes are saved, modify line 33 in `extension.js`:
+
 ```javascript
-this._notesDir = GLib.build_filenamev([GLib.get_home_dir(), '.quicknotes']);
+this._notesDir = GLib.build_filenamev([GLib.get_home_dir(), ".quicknotes"]);
 ```
 
 ## Project Structure
@@ -71,7 +75,6 @@ this._notesDir = GLib.build_filenamev([GLib.get_home_dir(), '.quicknotes']);
 ydrea-note/
 ├── extension.js      # Main extension code
 ├── metadata.json     # Extension metadata
-├── stylesheet.css    # Custom styles
 └── README.md         # This file
 ```
 
@@ -84,13 +87,14 @@ ydrea-note/
 
 ### Testing Changes
 
-1. Make your changes to `extension.js` or `stylesheet.css`
+1. Make your changes to `extension.js` and `metadata.json`
 2. Restart GNOME Shell: <kbd>Alt+F2</kbd> → `r` → <kbd>Enter</kbd>
 3. Check the looking glass (<kbd>Alt+F2</kbd> → `lg` → <kbd>Enter</kbd>) for errors
 
 ### Debugging
 
 View logs with:
+
 ```bash
 journalctl -f -o cat /usr/bin/gnome-shell
 ```
